@@ -1,0 +1,5 @@
+2019-01-31T00:15:10.051469Z mysqld_safe Logging to '/var/lib/mysql/SHIMABERTS.err'.
+2019-01-31T00:15:10.173638Z mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+mysqld: [ERROR] Found option without preceding group in config file /etc/mysql/my.cnf at line 22!
+mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
+2019-01-31T00:15:10.234345Z mysqld_safe mysqld from pid file /var/lib/mysql/SHIMABERTS.pid ended
