@@ -1,33 +1,29 @@
-version: '3'
+version: "3"
 services:
   # mariadb 10
   data:
     build: ./mariadb
     environment:
-      - MYSQL_DATABASE='test'
-      - MYSQL_USER='root'
-      - MYSQL_PASSWORD='root'
-      - MYSQL_ROOT_PASSWORD='root'
+      - MYSQL_DATABASE="test"
+      - MYSQL_USER="root"
+      - MYSQL_PASSWORD="root"
+      - MYSQL_ROOT_PASSWORD="root"
     volumes:
       - ./mariadb/db:/var/lib/mysql
       - ./mariadb/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     ports:
       - "3306:3306"
-  
-  # php-fpm 7.3
-  php:
-    build: ./php
-    ports:
-      - "9000:9000"
-
-  # nginx alpine
-  nginx:
-    build: ./nginx
+  #apache2 + php5.5 with cakephp2
+  cake2: 
+    build: ./cake2
+    environment:
+      - DEBIAN_FRONTEND="noninteractive"
+      - CAKEPHP_WEBROOT="/var/www/html/app/webroot"
     volumes:
-      - ./http:/srv/http
-      - ./nginx/conf.d:/etc/nginx/conf.d
-    depends_on:
-      - php
+      ##- ./cake2/default.conf:/etc/apache2/sites-enabled/default.conf
+      - ./cake2/default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./cake2/bootstrap.sh:/bootstrap.sh
     ports:
       - "80:80"
       - "443:443"
+      - "9000:9000"
